@@ -39,3 +39,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Git
+
+```sh
+git pull https://github.com/bsaradhy/frontend.git
+```
