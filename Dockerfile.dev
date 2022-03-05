@@ -1,0 +1,21 @@
+FROM node:16.13.1-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+#EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+
+# docker build -f Dockerfile.dev -t frontend .
+# docker run --rm --name frontend -p 3000:3000 frontend 
+# docker exec -it frontend sh
+# docker stop frontend
+# docker rmi -f frontend
+
+# docker run --rm --name frontend -p 3000:3000 -v /app/node_modules -v "%cd%":/app frontend
+# docker run -it frontend npm run test
