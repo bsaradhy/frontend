@@ -1,0 +1,28 @@
+language: generic
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bsaradhy/frontend -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true bsaradhy/frontend npm run test
+
+after_success:
+  - docker build -t bsaradhy/frontend .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bsaradhy/frontend
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-wet-2"
+  app: "<application name>"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-….."
+  bucket_patch: "<application name>"
+  on:
+    branch: main or master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"

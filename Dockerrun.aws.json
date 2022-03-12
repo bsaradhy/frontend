@@ -1,0 +1,29 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "frontend",
+            "image": "bsaradhy/frontend",
+            "hostname": "frontend",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "bsaradhy/server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "bsaradhy/nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPost": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["frontend", "server"]
+        }
+    ]
+}

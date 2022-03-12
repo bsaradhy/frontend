@@ -1,8 +1,12 @@
 .vscode
 .git
 .gitignore
+.travis.yml
 .dockerignore
 node_modules
 dist
 Dockerfile*
+compose*
+Dockerrun.aws.json
+package-lock.json
 README.md
